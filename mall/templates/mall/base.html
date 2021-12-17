@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="덕성여자대학교 2021-2 인터넷 프로그래밍 프로젝트" />
+    <meta name="author" content="Soobin Kim" />
+
+    <title>{% block head_title %}Ojo's Closet{% endblock %}</title>
+
+    <link href="{% static 'mall/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
+    <script src="https://kit.fontawesome.com/356953719f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include 'mall/navbar.html' %}
+
+      {% block main_area %}
+      {% endblock %}
+
+
+    <script>
+        function searchProduct(){
+            let searchValue = document.getElementById('search-input').value.trim();
+            if(searchValue.length > 1){
+            location.href = "/blog/search/" + searchValue + "/";
+            }
+            else {
+                alert('검색어(' + searchValue + ')가 너무 짧습니다.');
+            }
+        };
+        document.getElementById('search-input').addEventListener('keyup',
+                    function(event) {
+                        if(event.key == 'Enter') { searchPost() }
+                    }
+        )
+    </script>
+
+    {% include 'mall/footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

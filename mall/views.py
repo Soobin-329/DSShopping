@@ -63,6 +63,7 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):   # 모델명_form
         response = super(ProductUpdate, self).form_valid(form)
         return response
 
+
 class ProductList(ListView) :
     model = Product
     ordering = '-pk'
