@@ -1,4 +1,4 @@
-"""myShopping URL Configuration
+"""myInternetPrj URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -14,8 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# 미디어 파일을 위한 url 지정하기
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('mall/', include('mall.urls')),    # 서버IP/mall
+    path('admin/', admin.site.urls),        # 서버IP/admin
+    path('', include('single_pages.urls')),  # 서버IP/
+    path('accounts/', include('allauth.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 서버IP/media/
