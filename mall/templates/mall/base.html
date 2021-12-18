@@ -10,8 +10,9 @@
     <title>{% block head_title %}Ojo's Closet{% endblock %}</title>
 
     <link href="{% static 'mall/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
-    <link href="{% static 'mall/css/product_list.css' %}" rel="stylesheet" type="text/css" media="screen">
     <script src="https://kit.fontawesome.com/356953719f.js" crossorigin="anonymous"></script>
+    <link href="{% static 'mall/css/base.css' %}" rel="stylesheet" type="text/css" media="screen">
+    {% block head_css %}{% endblock %}
 </head>
 <body>
     {% include 'mall/navbar.html' %}
@@ -19,23 +20,6 @@
       {% block main_area %}
       {% endblock %}
 
-
-    <script>
-        function searchProduct(){
-            let searchValue = document.getElementById('search-input').value.trim();
-            if(searchValue.length > 1){
-            location.href = "/blog/search/" + searchValue + "/";
-            }
-            else {
-                alert('검색어(' + searchValue + ')가 너무 짧습니다.');
-            }
-        };
-        document.getElementById('search-input').addEventListener('keyup',
-                    function(event) {
-                        if(event.key == 'Enter') { searchPost() }
-                    }
-        )
-    </script>
 
     {% include 'mall/footer.html' %}
 

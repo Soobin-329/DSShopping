@@ -89,12 +89,12 @@ class ProductDetail(DetailView) :
 
 
 class ProductSearch(ProductList) :
-    paginate_by = None
+    paginate_by = 12
 
     def get_queryset(self):
         q = self.kwargs['q']
         product_list = Product.objects.filter(
-            Q(title__contains=q) | Q(tags__name__contains=q)
+            Q(name__contains=q) | Q(content__contains=q) | Q(material__contains=q)
         ).distinct()
         return product_list
 

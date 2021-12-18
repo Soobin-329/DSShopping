@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
+import os
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
 
 # Create your models here.
 class Category(models.Model):
@@ -32,7 +36,7 @@ class Maker(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    content = models.CharField(max_length=100, blank=True)
+    content = MarkdownxField()
     price = models.IntegerField()
     material = models.CharField(max_length=100, blank=True)
 
@@ -48,5 +52,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return f'/mall/{self.pk}/'
+
+    def get_content_markdown(self):
+        return markdown(self.content)
+
 
 

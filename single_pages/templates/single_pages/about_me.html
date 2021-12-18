@@ -1,0 +1,72 @@
+{% extends 'mall/base.html' %}
+
+{% load static %}
+
+{% block head_css %}
+    <link href="{% static 'single_pages/css/about_me.css' %}" rel="stylesheet" type="text/css" media="screen">
+{% endblock %}
+
+{% block main_area %}
+
+    <!-- Header-->
+    <header class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-black">
+                <h1 class="display-4 fw-bolder">Ojo's Closet</h1>
+                <p class="lead fw-normal text-black-50 mb-0">Shop in style</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- About us section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h1>About us</h1>
+            <hr>
+            <div><span>
+                Ojo's Closet provides you special experience of clothes shopping.<br>
+                We value the customer's time, convenience and honesty.<br>
+                The customer is at the heart of our unique business model through our extensive retail network.<br>
+            </span></div>
+        </div>
+    </section>
+
+    <!-- Contact section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h1>Contact us</h1>
+                <hr>
+                <div class="container py-3">
+                    <h4><i class="fas fa-phone-alt"></i> TELEPHONE</h4>
+                    <br>
+                    <p>
+                        02 901 1234<br>
+                        <br>
+                        MON- FRI: 9:00AM TO 7:00PM<br>
+                        SAT: 10:00AM TO 4:00PM<br>
+                    </p>
+                </div>
+            <hr>
+                <div class="container py-3">
+                    <h4><i class="far fa-building"></i> ADDRESS</h4>
+                    <br>
+                    <p>
+                        서울시 강남구 영동대로 511<br>
+                        <br>
+                        MON- FRI: 10:00AM TO 6:00PM<br>
+                    </p>
+                </div>
+            <hr>
+            <div class="container py-3">
+                    <h4><i class="fas fa-at"></i>EMAIL</h4>
+                    <br>
+                    <p>
+                        ojoscloset@gmail.com
+                    </p>
+                </div>
+            <hr>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,4 +1,11 @@
 {% extends 'mall/base.html' %}
+
+{% load static %}
+
+{% block head_css %}
+    <link href="{% static 'mall/css/product_list.css' %}" rel="stylesheet" type="text/css" media="screen">
+{% endblock %}
+
 {% block main_area %}
 
     <!-- Header-->
@@ -10,6 +17,13 @@
             </div>
         </div>
     </header>
+
+    {% if search_info or category %}
+    <div class="container pt-5">
+        {% if search_info %}<h1>{{ search_info }}</h1>{% endif %}
+        {% if category %}<h1>{{ category | upper }}</h1>{% endif %}
+    </div>
+    {% endif %}
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">

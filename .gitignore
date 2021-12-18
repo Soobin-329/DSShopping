@@ -134,7 +134,8 @@ dmypy.json
 
 # images
 .images/
-/maker/images/
-/mall/images/
+/_media/maker/images/
+/_media/mall/images/
 /single_pages/images/
 /single_pages/static/single_pages/images/
+/_media/

@@ -1,7 +1,7 @@
 <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="/mall/">Ojo's Closet</a>
+            <a class="navbar-brand" href="/">Ojo's Closet</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -10,13 +10,27 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                            <li><a class="dropdown-item" href="/mall/">All Products</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            <li><a class="dropdown-item" href="/mall/category/tops">Tops</a></li>
+                            <li><a class="dropdown-item" href="/mall/category/bottoms">Bottoms</a></li>
+                            <li><a class="dropdown-item" href="/mall/category/shoes">Shoes</a></li>
+                            <li><a class="dropdown-item" href="/mall/category/bags">Bags</a></li>
                         </ul>
                     </li>
                 </ul>
+
+                <!-- Search widget-->
+                <div class="ml-auto">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="search-input" aria-describedby="button-search" />
+                        <button class="btn btn-outline-white" id="button-search" type="button" onclick="searchProduct()"><i class="fas fa-search"></i>Search</button>
+                    </div>
+                </div>
+                <!-- Login-->
+
+
+                <!-- Shopping cart-->
                 <div class="ml-auto">
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
@@ -29,3 +43,20 @@
             </div>
         </div>
     </nav>
+
+    <script>
+        function searchProduct(){
+            let searchValue = document.getElementById('search-input').value.trim();
+            if(searchValue.length > 1){
+            location.href = "/mall/search/" + searchValue + "/";
+            }
+            else {
+                alert('검색어(' + searchValue + ')가 너무 짧습니다.');
+            }
+        };
+        document.getElementById('search-input').addEventListener('keyup',
+                    function(event) {
+                        if(event.key == 'Enter') { searchProduct() }
+                    }
+        )
+    </script>
