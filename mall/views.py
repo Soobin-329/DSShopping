@@ -67,7 +67,7 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):   # 모델명_form
 class ProductList(ListView) :
     model = Product
     ordering = '-pk'
-    paginate_by = 20
+    paginate_by = 12
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductList, self).get_context_data()
@@ -83,6 +83,7 @@ class ProductDetail(DetailView) :
         context = super(ProductDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_product_count'] = Product.objects.filter(category=None).count()
+        context['product_lists'] = Product.objects.all()
 #        context['comment_form'] = CommentForm
         return context
 

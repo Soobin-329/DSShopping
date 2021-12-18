@@ -1,21 +1,47 @@
 {% extends 'mall/base.html' %}
+<!--{% load crispy_forms_tags %}-->
+{% block head_title %}
+    {{ product.name }} - Ojo's Closet
+{% endblock %}
 {% block main_area %}
 
-    <!-- Header-->
-    <header class="bg-dark py-5">
+<!-- Product section-->
+    <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Ojo's Closet</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Shop in style</p>
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    {% if product.image %}
+                        <img class="card-img-top mb-5 mb-md-0" sizes="600*700" src="{{ product.image.url }}" alt="{{ product }}의 image" />
+                    {% else %}
+                        <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." />
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <div class="small mb-1">{{ product.category }} :: {{ product.maker }}</div>
+                    <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
+                    <div class="fs-5 mb-5">
+                        <span>₩ {{ product.price }}</span>
+                    </div>
+                    <p class="lead"> {{ product.content }}</p>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
-    <!-- Section-->
-    <section class="py-5">
+    </section>
+
+    <!-- Related items section by Category-->
+    <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
-            {% if product_list.exists %}
+            <h2 class="fw-bolder mb-4">Related products</h2>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                {% for p in product_list %}
+                {% for p in product_lists %}
+                {% if product.category == p.category and p != product %}
                 <!-- Product-->
                 <div class="col mb-5">
                     <div class="card h-100">
@@ -44,36 +70,10 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
-        {% else %}
-            <h2>아직 게시물이 없습니다.</h2>
-        {% endif %}
         </div>
     </section>
 
-<!-- Pagination-->
-    {% if is_paginated %}
-    <hr class="my-0" />
-    <ul class="pagination justify-content-center my-4">
-        {% if page_obj.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">&larr; Newer</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&larr; Newer</a>
-        </li>
-        {% endif %}
-        {% if page_obj.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Older &rarr;</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" href="#!">Older &rarr;</a>
-        </li>
-        {% endif %}
-    </ul>
-    {% endif %}
 {% endblock %}
