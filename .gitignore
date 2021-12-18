@@ -131,3 +131,6 @@ dmypy.json
 
 # no secrets.json files
 *secrets.json
+
+# images
+images/
