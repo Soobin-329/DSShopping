@@ -1,3 +1,5 @@
+{% load socialaccount %}
+
 <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
@@ -27,8 +29,45 @@
                         <button class="btn btn-outline-white" id="button-search" type="button" onclick="searchProduct()"><i class="fas fa-search"></i>Search</button>
                     </div>
                 </div>
-                <!-- Login-->
 
+                <!-- Login-->
+                <ul class="navbar-nav ml-auto">
+                    <!-- 로그인이 되어 있을 때-->
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if user.socialaccount_set.all.0.get_avatar_url %}
+                        <img class="rounded-circle" width="25px"
+                             src="{{ user.socialaccount_set.all.0.get_avatar_url }}">
+                        {% else %}
+                        <img class="rounded-circle" width="25px"
+                             src="https://doitdjango.com/avatar/id/396/c5a7816bd8149d0b/svg/{user.email}/" >
+                        {% endif %}
+                        {{ user.username }}
+                      </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/accounts/logout/">
+                                Log out
+                            </a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="/mall/mypage">
+                                My Page
+                            </a></li>
+                        </ul>
+                    <!-- 로그인이 안되어 있을 때-->
+                    {% else %}
+                    <li class="nav-item">
+                      <a role="button" class="btn btn-outline-dark" href="accounts/login/">
+                          Log in
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a role="button" class="btn btn-outline-dark" href="/accounts/signup/">
+                            Sign up
+                        </a>
+                    </li>
+                    {% endif %}
+                  </ul>
 
                 <!-- Shopping cart-->
                 <div class="ml-auto">

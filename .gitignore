@@ -133,9 +133,10 @@ dmypy.json
 *secrets.json
 
 # images
-.images/
+/images/
 /_media/maker/images/
 /_media/mall/images/
 /single_pages/images/
 /single_pages/static/single_pages/images/
+/_media/
 /_media/

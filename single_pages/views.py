@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from mall.models import Product
+from mall.models import Product, Category
 
 # Create your views here.
 def landing(request):
@@ -8,4 +8,16 @@ def landing(request):
                   {'recent_products' : recent_products})
 
 def about_me(request):
-    return render(request, 'single_pages/about_me.html')
+    labels = []
+    data = []
+
+    queryset = Category.objects.all()
+
+    for label in queryset:
+        labels.append(label.name)
+        data.append(Product.objects.filter(category=label).count())
+
+    return render(request, 'single_pages/about_me.html', {
+        'labels': labels,
+        'data': data,
+    })

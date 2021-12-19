@@ -8,6 +8,20 @@
 <!-- Product section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
+            <!-- product edit-->
+            {% if user.is_authenticated %}
+                {% if user.is_staff or user.is_superuser %}
+                    <div class="row gx-3 align-items-right">
+                        <div class="col-md-12">
+                            <a href="/mall/update_product/{{product.pk}}/"
+                               class="btn btn-outline-dark float-right">
+                                <i class="fas fa-pen"></i>
+                                Edit
+                            </a>
+                         </div>
+                    </div>
+                {% endif %}
+            {% endif %}
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6">
                     {% if product.image %}

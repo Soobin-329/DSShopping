@@ -44,13 +44,13 @@ class ProductCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         else :
             return redirect('/product/')
 
-class ProductUpdate(LoginRequiredMixin, UpdateView):   # 모델명_form
+class ProductUpdate(LoginRequiredMixin, UpdateView):
     model = Product
     fields = ['name', 'content', 'price', 'material', 'image', 'category', 'maker']
 
     template_name = 'mall/product_update_form.html'
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user == self.get_object().author :
+        if request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser):
             return super(ProductUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
@@ -121,3 +121,5 @@ def category_page(request, slug):
                       'category' : category     # 카테고리를 post_list.html로 전달
                   }
             )
+
+def myPage(request)

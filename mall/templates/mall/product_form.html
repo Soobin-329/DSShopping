@@ -1,0 +1,20 @@
+{% extends 'mall/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Create Product{% endblock %}
+{% block main_area %}
+
+    {% include 'mall/header.html' %}
+
+    <div class="container py-4 my-4">
+        <h1>Upload New Product</h1>
+        <hr/>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                {{ form | crispy }}
+
+            <button type="submit" class="btn btn-outline-dark float-right">Submit</button>
+        </form>
+        {{ form.media }}
+    </div>
+{% endblock %}
