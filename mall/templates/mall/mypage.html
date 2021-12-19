@@ -1,0 +1,70 @@
+{% extends 'mall/base.html' %}
+
+{% load static %}
+
+{% block main_area %}
+
+    {% include 'mall/header.html' %}
+
+    {% if user.is_authenticated %}
+    <!-- myPage section-->
+    <section class="py-5">
+        <div class="container">
+            <h1>{{ user.username | upper }}'s Page</h1>
+            <hr>
+            <div style="font-size:18px">
+                <p>
+                    Username: {{ user.username }}
+                </p>
+                <p>
+                    {% if user.emailaddress %}
+                        Email address: {{ user.emailaddress }}
+                    {% endif %}
+                </p>
+                <p>
+                    Joined Date: {{ user.date_joined | date:"Y.m.d h:m:s" }}
+                </p>
+                <p>
+                    {% if user.socialaccount %}
+                        Social account: {{ user.socialaccount }}
+                    {% endif %}
+                </p>
+            </div>
+            <hr>
+            <!-- myComments-->
+            <h2>{{ user.username }}'s Comments</h2>
+            <hr>
+            <div class="mb-5 container" id="comment-area">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        {% for c in comments %}
+                        {% if c.author == user %}
+                        <!-- Single comment-->
+                        <a class="text-reset" href="{{ c.product.get_absolute_url }}">
+                            <div class="d-flex" id="comment-{{ c.pk }}">
+                                <div class="flex-shrink-0">
+                                    <img class="rounded-circle" src="{{ c.get_avatar_url }}" alt="{{ c.author }}" width="60px" />
+                                </div>
+                                <div class="ms-3">
+                                    <div class="fw-bold">{{ c.author.username }} &nbsp;&nbsp;&nbsp;
+                                        <small class="text-muted">{{ c.created_at }}</small></div>
+                                    <p>{{ c.content | linebreaks }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% else %}
+<script>
+    alert('먼저 로그인을 해주세요.');
+    window.location.href = '/';
+</script>
+{% endif %}
+
+{% endblock %}

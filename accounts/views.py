@@ -18,7 +18,7 @@ def signup(request):
     # GET 요청인 경우에는 회원가입 화면을 리턴
     else:
         form = UserForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'accounts/sign_up.html', {'form': form})
 
 # UserCreationForm의 is_valid 함수는 계정생성 화면의 필드값 3개가 모두 입력되었는지,
 # 비밀번호1과 비밀번호2가 같은지,

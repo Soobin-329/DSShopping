@@ -1,31 +1,31 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Product, Category, Maker
+from .models import Product, Category, Maker, Comment
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
-#from .forms import CommentForm
+from .forms import CommentForm
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
 # Create your views here.
-'''
 def new_comment(request, pk):
     if request.user.is_authenticated:
-        post = get_object_or_404(Post, pk=pk)
+        product = get_object_or_404(Product, pk=pk)
         if request.method == 'POST':
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid():
                 comment = comment_form.save(commit=False)
-                comment.post = post
+                comment.product = product
                 comment.author = request.user
                 comment.save()
                 return redirect(comment.get_absolute_url())
         else:
-            return redirect(post.get_absolute_url())
+            return redirect(product.get_absolute_url())
     else:
         raise PermissionDenied
-'''
+
 
 
 class ProductCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -84,7 +84,7 @@ class ProductDetail(DetailView) :
         context['categories'] = Category.objects.all()
         context['no_category_product_count'] = Product.objects.filter(category=None).count()
         context['product_lists'] = Product.objects.all()
-#        context['comment_form'] = CommentForm
+        context['comment_form'] = CommentForm
         return context
 
 
@@ -122,4 +122,13 @@ def category_page(request, slug):
                   }
             )
 
-def myPage(request)
+
+def myPage(request):
+    current_user = request.user
+
+    if current_user.is_authenticated:
+        user = User.objects.get(username=current_user.username)
+
+        return render(request, 'mall/mypage.html', {'user': user, 'comments': Comment.objects.all()})
+    else:
+        return redirect('/')

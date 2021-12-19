@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 {% load static %}
+{% load socialaccount %}
 
-<html lang="en">
+<html lang="ko">
     <head>
-        {% include 'recipe/header.html' %}
         <link rel="stylesheet" href="{% static 'accounts/css/signup.css' %}" media="screen">
     </head>
 
@@ -16,6 +16,15 @@
                 {% csrf_token %}
                 {% include "accounts/form_errors.html" %}
                 <h3 class="login" style="letter-spacing:-1px;">SIGN UP</h3>
+                <hr>
+                <div class="form-group">
+                    <p style="text-align: center; font-size:10px; color:#333">
+                        다른 서비스로 회원가입
+                    </p>
+                    <a class="btn btn-outline-dark" href="{% provider_login_url 'google' %}">
+                        <i class="fab fa-google"></i>
+                    </a>
+                </div>
                 <hr>
                 <div class="form-group">
                     <p style="text-align: left; font-size:15px; color:#666">
